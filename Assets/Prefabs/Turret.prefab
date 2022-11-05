@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3265687152192059932}
   - component: {fileID: 5150092693580067015}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,8 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5331729864818710020}
   - component: {fileID: 3119365406734767814}
-  - component: {fileID: 4940141824668013260}
-  m_Layer: 0
+  - component: {fileID: 8327478801143408209}
+  - component: {fileID: 6960371422607371654}
+  m_Layer: 2
   m_Name: Turret
   m_TagString: Turret
   m_Icon: {fileID: 0}
@@ -171,7 +172,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4940141824668013260
+--- !u!58 &8327478801143408209
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134712259684156548}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3
+--- !u!114 &6960371422607371654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,9 +197,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2134712259684156548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d30f951f09d13f54883069e2f2a0bde1, type: 3}
+  m_Script: {fileID: 11500000, guid: 38325e777a44c3e4e95309baa6260176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemiesInRange:
+  - {fileID: 5010466089847953979, guid: b30429d37c18faa4db70b04eb989c273, type: 3}
+  - {fileID: 7736936031572444137, guid: 0361c0044724dd44e9dfda86158a925b, type: 3}
 --- !u!1 &5239615357174339852
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7389400439807058429}
   - component: {fileID: 7190926672116788857}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tank Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}

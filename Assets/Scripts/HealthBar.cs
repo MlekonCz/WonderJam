@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerFollowTarget : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
-    
+    // Start is called before the first frame update
     void Start()
     {
         
@@ -14,10 +14,5 @@ public class TowerFollowTarget : MonoBehaviour
     void Update()
     {
         
-        {
-            
-        }
-
-
-    }   
+    }
 }
