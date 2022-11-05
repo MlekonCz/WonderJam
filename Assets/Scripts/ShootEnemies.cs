@@ -5,18 +5,15 @@ using System.Collections.Generic;
 
 public class ShootEnemies : MonoBehaviour
 {
-    public List<GameObject> enemiesInRange;
+    public List<GameObject> enemiesInRange = new List<GameObject>();
 
 // Start is called before the first frame update
-    void Start()
-    {
-        enemiesInRange = new List<GameObject>();
-        void OnEnemyDestroy(GameObject enemy)
+     private void OnEnemyDestroy(GameObject enemy)
         {
             enemiesInRange.Remove (enemy);
         }
 
-        void OnTriggerEnter2D (Collider2D other)
+     private  void OnTriggerEnter2D (Collider2D other)
         {
             if (other.gameObject.tag.Equals("Enemy"))
             {
@@ -26,7 +23,7 @@ public class ShootEnemies : MonoBehaviour
                 del.enemyDelegate += OnEnemyDestroy;
             }
         }
-        void OnTriggerExit2D (Collider2D other)
+     private  void OnTriggerExit2D (Collider2D other)
         {
             if (other.gameObject.tag.Equals("Enemy"))
             {
@@ -35,12 +32,4 @@ public class ShootEnemies : MonoBehaviour
                 del.enemyDelegate -= OnEnemyDestroy;
             }
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

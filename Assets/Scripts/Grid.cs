@@ -9,7 +9,7 @@ namespace DefaultNamespace
         private int _height;
         private float _cellSize;
         private Vector3 _originPosition;
-        private int[,] _gridArray;
+        private Node[,] _gridArray;
         private TextMesh[,] _debugTextArray;
         
         
@@ -18,7 +18,7 @@ namespace DefaultNamespace
             _width = width;
             _height = height;
             _cellSize = cellSize;
-            _gridArray = new int[width, height];
+            _gridArray = new Node[width, height];
             _originPosition = originPosition;
             _debugTextArray = new TextMesh[width, height];
             for (int x = 0; x < _gridArray.GetLength(0); x++)
@@ -51,8 +51,8 @@ namespace DefaultNamespace
         {
             if (x >= 0 && y >= 0 && x < _width && y < _height)
             {
-                _gridArray[x, y] = value;
-                _debugTextArray[x, y].text = _gridArray[x, y].ToString();
+                _gridArray[x, y].GridNumber = value;
+                _debugTextArray[x, y].text = _gridArray[x, y].GridNumber.ToString();
             }
         }
         public void SetValue(Vector3 worldPosition, int value)
@@ -62,7 +62,7 @@ namespace DefaultNamespace
             SetValue(x,y,value);
         }
 
-        public int GetValue(int x, int y)
+        public Node GetValue(int x, int y)
         {
             if (x >= 0 && y >= 0 && x < _width && y < _height)
             {
@@ -70,11 +70,11 @@ namespace DefaultNamespace
             }
             else
             {
-                return -1;
+                return null;
             }
         }
         
-        public int GetValue(Vector3 worldPosition)
+        public Node GetValue(Vector3 worldPosition)
         {
             int x, y;
             GetXY(worldPosition,out x,out y);

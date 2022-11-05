@@ -25,16 +25,16 @@ public class PathFinder : MonoBehaviour
     private void Awake()
     {
         gridManager = FindObjectOfType<GridManager>();
+    }
+
+    private void Start()
+    {
         if (gridManager != null)
         {
             grid = gridManager.Grid;
             startNode = grid[startCoordinates]; 
             destinationNode = grid[destinationCoordinates];
         }
-    }
-
-    private void Start()
-    {
         GetNewPath();
     }
 

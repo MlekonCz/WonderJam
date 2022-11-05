@@ -29,7 +29,7 @@ namespace DefaultNamespace
             }
             if (Input.GetMouseButtonDown(1))
             {
-                Debug.Log(_grid.GetValue(_camera.ScreenToWorldPoint(Input.mousePosition)));
+                Debug.Log(_grid.GetValue(_camera.ScreenToWorldPoint(Input.mousePosition)).GridNumber);
             }
         }
     }
