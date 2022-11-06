@@ -1,16 +1,16 @@
 using CodeMonkey.Utils;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace GridSystem
 {
     public class Grid
     {
-        private int _width;
-        private int _height;
-        private float _cellSize;
-        private Vector3 _originPosition;
-        private Node[,] _gridArray;
-        private TextMesh[,] _debugTextArray;
+        private readonly int _width;
+        private readonly int _height;
+        private readonly float _cellSize;
+        private readonly Vector3 _originPosition;
+        public readonly Node[,] _gridArray;
+        private readonly TextMesh[,] _debugTextArray;
 
 
         public Grid(int width, int height, float cellSize, Vector3 originPosition)
@@ -25,7 +25,8 @@ namespace DefaultNamespace
             {
                 for (int y = 0; y < _gridArray.GetLength(1); y++)
                 {
-                    _debugTextArray[x, y] = UtilsClass.CreateWorldText(_gridArray[x, y].ToString(), null,
+                    _gridArray[x, y] = new Node(new Vector2Int(x,y), true);
+                    _debugTextArray[x, y] = UtilsClass.CreateWorldText(_gridArray[x, y].coordinates.ToString(), null,
                         GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) / 2, 20, Color.white,
                         TextAnchor.MiddleCenter);
                     Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, 100f);
@@ -39,7 +40,7 @@ namespace DefaultNamespace
             SetValue(2, 3, 50);
         }
 
-        private Vector3 GetWorldPosition(int x, int y)
+        public Vector3 GetWorldPosition(int x, int y)
         {
             return new Vector3(x, y) * _cellSize + _originPosition;
         }
@@ -77,7 +78,19 @@ namespace DefaultNamespace
                 return null;
             }
         }
-
+        
+        public bool TryFindNode(int x, int y)
+        {
+            if (x >= 0 && y >= 0 && x < _width && y < _height)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
         public Node GetValue(Vector3 worldPosition)
         {
             int x, y;
