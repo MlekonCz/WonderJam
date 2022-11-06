@@ -11,8 +11,8 @@ namespace DefaultNamespace
         private Vector3 _originPosition;
         private Node[,] _gridArray;
         private TextMesh[,] _debugTextArray;
-        
-        
+
+
         public Grid(int width, int height, float cellSize, Vector3 originPosition)
         {
             _width = width;
@@ -25,16 +25,18 @@ namespace DefaultNamespace
             {
                 for (int y = 0; y < _gridArray.GetLength(1); y++)
                 {
-                    _debugTextArray[x,y] = UtilsClass.CreateWorldText(_gridArray[x, y].ToString(), null,
-                        GetWorldPosition(x, y) + new Vector3(cellSize,cellSize) / 2, 20, Color.white, TextAnchor.MiddleCenter);
-                    Debug.DrawLine(GetWorldPosition(x,y),GetWorldPosition(x,y +1), Color.white, 100f);
-                    Debug.DrawLine(GetWorldPosition(x,y),GetWorldPosition(x + 1,y), Color.white, 100f);
+                    _debugTextArray[x, y] = UtilsClass.CreateWorldText(_gridArray[x, y].ToString(), null,
+                        GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) / 2, 20, Color.white,
+                        TextAnchor.MiddleCenter);
+                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, 100f);
+                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
                 }
             }
-            Debug.DrawLine(GetWorldPosition(0,height),GetWorldPosition(width,height), Color.white, 100f);
-            Debug.DrawLine(GetWorldPosition(width,0),GetWorldPosition(width,height), Color.white, 100f);
 
-            SetValue(2,3, 50);
+            Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
+            Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
+
+            SetValue(2, 3, 50);
         }
 
         private Vector3 GetWorldPosition(int x, int y)
@@ -45,8 +47,9 @@ namespace DefaultNamespace
         private void GetXY(Vector3 worldPosition, out int x, out int y)
         {
             x = Mathf.FloorToInt((worldPosition - _originPosition).x / _cellSize);
-           y = Mathf.FloorToInt((worldPosition - _originPosition).y / _cellSize);
+            y = Mathf.FloorToInt((worldPosition - _originPosition).y / _cellSize);
         }
+
         public void SetValue(int x, int y, int value)
         {
             if (x >= 0 && y >= 0 && x < _width && y < _height)
@@ -55,11 +58,12 @@ namespace DefaultNamespace
                 _debugTextArray[x, y].text = _gridArray[x, y].GridNumber.ToString();
             }
         }
+
         public void SetValue(Vector3 worldPosition, int value)
         {
             int x, y;
-            GetXY(worldPosition,out x,out y);
-            SetValue(x,y,value);
+            GetXY(worldPosition, out x, out y);
+            SetValue(x, y, value);
         }
 
         public Node GetValue(int x, int y)
@@ -73,12 +77,12 @@ namespace DefaultNamespace
                 return null;
             }
         }
-        
+
         public Node GetValue(Vector3 worldPosition)
         {
             int x, y;
-            GetXY(worldPosition,out x,out y);
-            return GetValue(x,y);
+            GetXY(worldPosition, out x, out y);
+            return GetValue(x, y);
         }
     }
 }
