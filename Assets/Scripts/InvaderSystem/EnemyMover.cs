@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GridSystem
 {
     public class EnemyMover : MonoBehaviour
     {
-        [SerializeField] [Range(0f,10f)] private float _Speed = 1f;
-        private Enemy enemy;
+        [FormerlySerializedAs("_Speed")] [SerializeField] [Range(0f,10f)] private float speed = 1f;
+        private Enemy _enemy;
 
         private List<Waypoint> _waypoints = new List<Waypoint>();
 
@@ -16,9 +17,9 @@ namespace GridSystem
 
         private void Awake()
         {
-            enemy = GetComponent<Enemy>();
+            _enemy = GetComponent<Enemy>();
             _pathController = FindObjectOfType<PathController>();
-            _waypoints = _pathController._Waypoints;
+            _waypoints = _pathController.waypoints;
         }
         
         private void OnEnable()
@@ -53,7 +54,7 @@ namespace GridSystem
                 
                 while (travelPercent <1f )
                 {
-                    travelPercent += Time.deltaTime * _Speed;
+                    travelPercent += Time.deltaTime * speed;
                     transform.position = Vector3.Lerp(startPosition, endPosition, travelPercent);
                     yield return new WaitForEndOfFrame();
                 }

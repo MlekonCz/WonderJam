@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DefaultNamespace
 {
     public class PathController : MonoBehaviour
     {
-        [SerializeField]
-        public List<Waypoint> _Waypoints = new List<Waypoint>();
+        [FormerlySerializedAs("_Waypoints")] [SerializeField]
+        public List<Waypoint> waypoints = new List<Waypoint>();
 
     }
 }

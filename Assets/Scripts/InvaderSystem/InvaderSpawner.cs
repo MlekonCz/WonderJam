@@ -1,15 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace InvaderSystem
 {
     public class InvaderSpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject enemyPrefab;
-        [SerializeField] [Range(0.1f,30f)] private float spawnTimer = 1f;
-        [SerializeField] [Range(0f,50f)]private int poolSize = 5;
+        [FormerlySerializedAs("_EnemyPrefab")] [SerializeField] private GameObject enemyPrefab;
+        [FormerlySerializedAs("_SpawnTimer")] [SerializeField] [Range(0.1f, 30f)] private float spawnTimer = 1f;
+        [FormerlySerializedAs("_PoolSize")] [SerializeField] [Range(0f, 50f)] private int poolSize = 5;
 
-        private GameObject[] pool;
+        private GameObject[] _pool;
+
+        private int _spawnedEnemies = 0;
 
         private void Awake()
         {
@@ -23,21 +26,21 @@ namespace InvaderSystem
 
         void PopulatePool()
         {
-            pool = new GameObject[poolSize];
-            for (int i = 0; i < pool.Length; i++)
+            _pool = new GameObject[poolSize];
+            for (int i = 0; i < _pool.Length; i++)
             {
-                pool[i] = Instantiate(enemyPrefab, transform);
-                pool[i].SetActive(false);
+                _pool[i] = Instantiate(enemyPrefab, transform);
+                _pool[i].SetActive(false);
             }
         }
 
         void EnableObjectInPool()
         {
-            for (int i = 0; i <pool.Length; i++)
+            for (int i = 0; i < _pool.Length; i++)
             {
-                if (!pool[i].activeInHierarchy)
+                if (!_pool[i].activeInHierarchy)
                 {
-                    pool[i].SetActive(true);
+                    _pool[i].SetActive(true);
                     return;
                 }
             }
